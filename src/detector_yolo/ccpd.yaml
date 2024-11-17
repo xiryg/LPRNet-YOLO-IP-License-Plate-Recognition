@@ -1,0 +1,8 @@
+# Dataset config
+path: D:\PycharmProjects\LPRNet-YOLO-IP-License-Plate-Recognition\data\ccpd_new_yolo  # 使用绝对路径
+train: images/train  # 相对于path的路径
+val: images/val
+test: images/test
+
+names:
+  0: license_plate
