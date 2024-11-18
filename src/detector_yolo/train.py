@@ -1,5 +1,4 @@
 from ultralytics import YOLO
-import os
 from multiprocessing import freeze_support
 import torch
 
@@ -37,7 +36,7 @@ def main():
     metrics = model.val(split="val")
 
     with torch.no_grad():
-        results = model("1.jpg")
+        results = model("test.jpg")
         results[0].show()
 
 
