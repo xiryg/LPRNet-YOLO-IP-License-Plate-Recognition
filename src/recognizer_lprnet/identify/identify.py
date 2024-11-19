@@ -1,12 +1,12 @@
 import torch
 import cv2
 import numpy as np
-from model.LPRNet import build_lprnet
-from utils.locate_lp import detect_and_save_roi
-from data.load_data import CHARS, transform
+from src.recognizer_lprnet.model.LPRNet import build_lprnet
+from src.recognizer_lprnet.utils.locate_lp import detect_and_save_roi
+from src.recognizer_lprnet.data.load_data import CHARS, transform
 
-img_path = "./data/test.jpg"
-model_path = "./weights/best.pt"
+img_path = "../data/test.jpg"
+model_path = "../weights/best.pt"
 img = detect_and_save_roi(img_path, model_path)
 img = cv2.resize(img, (94, 24))
 img = transform(img)
@@ -16,7 +16,7 @@ ims = torch.Tensor(img)
 lprnet = build_lprnet(lpr_max_len=8, phase=True, class_num=68, dropout_rate=0.5)
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 lprnet = lprnet.to(device)
-lprnet.load_state_dict(torch.load("./weights/Final_LPRNet_model.pth", weights_only=True))
+lprnet.load_state_dict(torch.load("../weights/Final_LPRNet_model.pth", weights_only=True))
 
 prebs = lprnet(ims.to(device))
 prebs = prebs.cpu().detach().numpy()
